@@ -89,7 +89,7 @@ module Spree::ProductDecorator
       taxon_names: all_taxons.map(&:last),
       skus: all_variants.map(&:last),
       total_on_hand: total_on_hand,
-      pot_size_ids: pot_size_ids,
+      # pot_size_ids: pot_size_ids,
       feature_ids: feature_ids,
       flowering_season_id: plant&.flowering_season_id,
       month_ids: month_ids,
