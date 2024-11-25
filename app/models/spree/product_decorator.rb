@@ -93,17 +93,17 @@ module Spree::ProductDecorator
       # feature_ids: feature_ids,
       # flowering_season_id: plant&.flowering_season_id,
       # month_ids: month_ids,
-      available: available,
+      # available: available,
       # planting_position_id: plant&.planting_position_id,
       # soil_type_id: plant&.soil_type_id,
       # spread_id: plant&.spread_id,
       # colour_id: plant&.colour_id,
       # height_id: plant&.height_id,
       # in_stock_pot_size_ids: in_stock_pot_size_ids,
-      stock_available_state: stock_available_state,
-      price: sphinx_price,
+      # stock_available_state: stock_available_state,
+      # price: sphinx_price,
       available_on: available_on,
-      common_name: common_name
+      # common_name: common_name
     }
 
     json.merge!(option_types_for_es_index(all_variants))
