@@ -1,6 +1,7 @@
 module Spree::ProductDecorator
   def self.prepended(base)
     base.searchkick(
+      word_start: [:name],
       callbacks: :async
     ) unless base.respond_to?(:searchkick_index)
 
