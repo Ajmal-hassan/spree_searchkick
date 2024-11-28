@@ -3,6 +3,15 @@ module Spree::ProductDecorator
     base.searchkick(
       callbacks: :async,
       word_start: [:name],
+      settings: { number_of_replicas: 0 },
+      merge_mappings: true,
+      mappings: {
+        properties: {
+          properties: {
+            type: 'nested'
+          }
+        }
+      }
     ) unless base.respond_to?(:searchkick_index)
 
     base.scope :search_import, lambda {
@@ -27,7 +36,7 @@ module Spree::ProductDecorator
     def base.autocomplete(keywords)
       if keywords
 
-        Spree::Product.search(keywords,fields: [{name: :word_start}], limit: 50, load: false).map(&:name).map(&:strip).uniq
+        Spree::Product.search(keywords,fields: autocomplete_fields,  limit: 50, load: false).map(&:name).map(&:strip).uniq
         # Spree::Product.search(
         #   keywords,
         #   fields: autocomplete_fields,
