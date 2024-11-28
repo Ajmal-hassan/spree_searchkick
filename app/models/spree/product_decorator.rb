@@ -27,7 +27,7 @@ module Spree::ProductDecorator
     def base.autocomplete(keywords)
       if keywords
 
-        Spree::Product.search(keywords,fields: [{name: :word_start}], misspellings: {below: 5}, limit: 50, load: false).map(&:name).map(&:strip).uniq
+        Spree::Product.search(keywords,fields: [{name: :word_start}], limit: 50, load: false).map(&:name).map(&:strip).uniq
         # Spree::Product.search(
         #   keywords,
         #   fields: autocomplete_fields,
