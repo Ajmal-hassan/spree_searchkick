@@ -2,7 +2,7 @@ module Spree::ProductDecorator
   def self.prepended(base)
     base.searchkick(
       callbacks: :async,
-      text_middle: [:name],
+      word_start: [:name],
       settings: { number_of_replicas: 0 },
       merge_mappings: true,
       mappings: {
