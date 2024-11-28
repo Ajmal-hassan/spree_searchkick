@@ -1,9 +1,8 @@
 module Spree::ProductDecorator
   def self.prepended(base)
-    base.searchkick(
-      word_start: [:name],
-      callbacks: :async
-    ) unless base.respond_to?(:searchkick_index)
+    unless base.respond_to?(:searchkick_index)
+      base.searchkick word_start: [:name], callbacks: :async
+    end
 
     base.scope :search_import, lambda {
       includes(
@@ -26,7 +25,8 @@ module Spree::ProductDecorator
 
     def base.autocomplete(keywords)
       if keywords
-        Spree::Product.search(keywords,fields: [:name], match: :word_start, load: false).map(&:name).map(&:strip).uniq
+        Spree::Product.search(where: {name: {ilike: "%#{keywords}%"}}, order: {_score: :desc}, limit: 50, load: false).map(&:name).map(&:strip).uniq
+        # Spree::Product.search(keywords,fields: [:name], match: :word_start, load: false).map(&:name).map(&:strip).uniq
         # Spree::Product.search(
         #   keywords,
         #   fields: autocomplete_fields,
